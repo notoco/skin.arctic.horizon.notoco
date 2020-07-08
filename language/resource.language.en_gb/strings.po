@@ -570,6 +570,11 @@ msgctxt "#31113"
 msgid "Fullscreen widget path"
 msgstr ""
 
+#: /1080i/SkinSettings.xml
+msgctxt "#31114"
+msgid "Display OSD using standard layout"
+msgstr ""
+
 #: /1080i/Custom_1118_EnableRatings.xml
 msgctxt "#31116"
 msgid "Customise ratings"

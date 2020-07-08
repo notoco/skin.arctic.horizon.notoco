@@ -618,6 +618,15 @@
                         <selected>!Skin.HasSetting(NormalLyrics)</selected>
                         <onclick>Skin.ToggleSetting(NormalLyrics)</onclick>
                     </control>
+
+                    <control type="radiobutton" id="19517" description="Standard OSD">
+                        <visible>Integer.IsEqual(Window.Property(CurrentFocus),9005)</visible>
+                        <include>Defs_Settings_Button</include>
+                        <label>$LOCALIZE[31114]</label>
+                        <selected>Skin.HasSetting(StandardMusicOSD)</selected>
+                        <onclick>Skin.ToggleSetting(StandardMusicOSD)</onclick>
+                    </control>
+
                     <control type="radiobutton" id="19514" description="Animate Artist slideshow">
                         <visible>Integer.IsEqual(Window.Property(CurrentFocus),9005)</visible>
                         <include>Defs_Settings_Button</include>
