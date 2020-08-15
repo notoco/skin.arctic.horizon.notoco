@@ -1496,7 +1496,7 @@
         <include content="Home_Hub_Widget_Label">
             <param name="id" value="$PARAM[id]$PARAM[id]" />
             <param name="label" value="$VAR[Label_Header_Center]" />
-            <param name="altlabel" value="$INFO[Control.GetLabel(3),, ]$INFO[Control.GetLabel(4)]" />
+            <!-- <param name="altlabel" value="$INFO[Control.GetLabel(3),, ]$INFO[Control.GetLabel(4)]" /> -->
             <top>0</top>
             <!-- <animation effect="fade" start="0" end="100" delay="300" time="500" tween="cubic" easing="inout">Visible</animation>
             <animation effect="fade" start="100" end="0" time="500" tween="cubic" easing="inout">Hidden</animation>

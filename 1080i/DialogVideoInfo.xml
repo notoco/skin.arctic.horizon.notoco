@@ -11,6 +11,9 @@
     <onunload condition="!String.IsEmpty(Window.Property(CloseBusyDialog))">Dialog.Close(busydialognocancel)</onunload>
     <onunload condition="!String.IsEmpty(Window.Property(CloseBusyDialog))">ClearProperty(CloseBusyDialog)</onunload>
     <onload>SetProperty(TMDBHelper.Info.OriginalPath,$INFO[ListItem.FolderPath],Home)</onload>
+
+    <onload>SetProperty(WS1,Cast)</onload>
+    <onload>SetProperty(WS2,Recommendations)</onload>
     <controls>
 
         <!-- Main Group -->

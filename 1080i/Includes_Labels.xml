@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
+
+    <variable name="Label_WidgetSelector_Cast">
+        <value condition="String.IsEqual(Window.Property(WS1),Cast)">$INFO[ListItem.Title,$LOCALIZE[31058] ,]</value>
+        <value>Cast</value>
+    </variable>
+
     <variable name="Label_ColorValue">
         <value condition="String.IsEqual(Window(Home).Property(colorpick),Highlight) + !String.IsEmpty(Skin.String(focuscolor.name))">$INFO[Skin.String(focuscolor.name)]</value>
         <value condition="String.IsEqual(Window(Home).Property(colorpick),Gradient) + !String.IsEmpty(Skin.String(gradientcolor.name))">$INFO[Skin.String(gradientcolor.name)]</value>
