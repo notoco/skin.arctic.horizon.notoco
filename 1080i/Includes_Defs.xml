@@ -340,15 +340,11 @@
     </variable>
 
     <include name="Defs_InfoList_OnBack">
-        <onback>SetFocus(5001)</onback>
-        <onback>SetFocus(5000)</onback>
         <onback>300</onback>
     </include>
 
     <include name="Defs_InfoList_OnClick">
         <definition>
-            <onclick>SetFocus(5001)</onclick>
-            <onclick>SetFocus(5000)</onclick>
             <onclick>SetFocus(300)</onclick>
             <onclick>Dialog.Close(1140)</onclick>
             <onclick>Dialog.Close(1142)</onclick>

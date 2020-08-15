@@ -344,6 +344,12 @@
         </include> -->
     </include>
 
+    <include name="Info_Buttons_Common">
+        <onup>9601</onup>
+        <onfocus>SetProperty(WS1,Cast)</onfocus>
+        <onfocus>SetProperty(WS2,Recommendations)</onfocus>
+    </include>
+
     <include name="Info_Buttons_Video">
         <include content="$PARAM[buttoninclude]">
             <param name="id" value="3308" />
@@ -363,7 +369,7 @@
             <onclick>SetProperty(CloseBusyDialog,1)</onclick>
             <onclick>AlarmClock(closebusydialog,Dialog.Close(busydialognocancel),00:05,silent)</onclick>
 
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
         </include>
 
         <include content="$PARAM[buttoninclude]">
@@ -380,7 +386,7 @@
             <onclick condition="!Window.IsVisible(MyVideoNav.xml) + String.IsEmpty(ListItem.DBID)">RunScript(plugin.video.themoviedb.helper,close_dialog=1190,call_path=$INFO[ListItem.FolderPath])</onclick>
             <onclick condition="!Window.IsVisible(MyVideoNav.xml) + !String.IsEmpty(ListItem.DBID) + String.IsEqual(ListItem.DBType,tvshow)">RunScript(plugin.video.themoviedb.helper,close_dialog=1190,call_path=$INFO[ListItem.DBID,videodb://tvshows/titles/,/])</onclick>
             <onclick condition="Window.IsVisible(MyVideoNav.xml) + !String.IsEmpty(ListItem.DBID) + ListItem.IsCollection">RunScript(plugin.video.themoviedb.helper,close_dialog=1190,call_path=$INFO[ListItem.DBID,videodb://movies/sets/,/])</onclick>
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
             <onfocus>ClearProperty(overview)</onfocus>
         </include>
 
@@ -394,7 +400,7 @@
             <onclick condition="String.IsEmpty(ListItem.TvShowTitle) + !String.IsEmpty(ListItem.Title)">Skin.SetString(SearchTerm,$INFO[ListItem.Title])</onclick>
             <onclick condition="String.IsEmpty(ListItem.TvShowTitle) + String.IsEmpty(ListItem.Title) + !String.IsEmpty(ListItem.Label)">Skin.SetString(SearchTerm,$INFO[ListItem.Label])</onclick>
             <onclick>RunScript(plugin.video.themoviedb.helper,close_dialog=1190,call_id=1138)</onclick>
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
             <onfocus>ClearProperty(overview)</onfocus>
         </include>
 
@@ -409,7 +415,7 @@
             <onclick condition="String.IsEmpty(ListItem.Trailer)">SetProperty(HasTrailer,$INFO[Window(Home).Property(TMDbHelper.ListItem.Trailer)],Home)</onclick>
             <onclick condition="String.IsEmpty(ListItem.Trailer)">PlayMedia($INFO[Window(Home).Property(TMDbHelper.ListItem.Trailer)],False,1)</onclick>
             <onclick>SetFocus(9608)</onclick>
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
             <onfocus>ClearProperty(overview)</onfocus>
         </include>
 
@@ -420,7 +426,7 @@
             <param name="icon" value="special://skin/extras/icons/watchlist.png" />
             <param name="visible" value="!String.IsEmpty(ListItem.Property(tmdb_id)) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]" />
             <onclick>RunScript(plugin.video.themoviedb.helper,sync_trakt=watchlist,tmdb_id=$INFO[ListItem.Property(tmdb_id)],$VAR[Info_Param_Type],cache_refresh)</onclick>
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
             <onfocus>ClearProperty(overview)</onfocus>
         </include>
 
@@ -430,7 +436,7 @@
             <param name="label" value="$LOCALIZE[563]" />
             <param name="icon" value="special://skin/extras/icons/userrating.png" />
             <param name="visible" value="Control.IsEnabled(7) + !ListItem.IsCollection" />
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
             <onfocus>ClearProperty(overview)</onfocus>
         </include> -->
 
@@ -441,7 +447,7 @@
             <param name="icon" value="special://skin/extras/icons/infobubble.png" />
             <onclick>SetFocus(9601)</onclick>
             <onfocus>SetProperty(overview,1)</onfocus>
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
         </include>
 
         <include content="$PARAM[buttoninclude]">
@@ -452,7 +458,7 @@
             <param name="visible" value="String.IsEmpty(ListItem.Property(tmdb_id)) + Control.IsEnabled(6) + !Skin.HasSetting(KioskMode)" />
             <onclick>SetFocus(3600)</onclick>
             <onfocus>SetProperty(overview,1)</onfocus>
-            <onup>9601</onup>
+            <include>Info_Buttons_Common</include>
         </include>
     </include>
 

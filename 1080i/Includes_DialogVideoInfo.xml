@@ -64,8 +64,29 @@
                     <height>infowidgets_group_height</height>
                     <control type="group" description="Top Row">
                         <include content="DialogVideoInfo_WidgetSelector_Grouplist">
-                            <param name="id" value="5000" />
-                            <param name="groupid" value="5600" />
+                            <visible allowhiddenfocus="true">ControlGroup(5200).HasFocus()</visible>
+                            <include content="DialogVideoInfo_WidgetButton_Cast">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Crew">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Collection">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Posters">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Gallery">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Youtube">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                        </include>
+                        <include content="DialogVideoInfo_WidgetSelector_Grouplist">
+                            <param name="id" value="5200" />
+                            <visible allowhiddenfocus="true">ControlGroup(5200).HasFocus()</visible>
                             <include>DialogVideoInfo_WidgetButton_Cast</include>
                             <include>DialogVideoInfo_WidgetButton_Crew</include>
                             <include>DialogVideoInfo_WidgetButton_Collection</include>
@@ -85,8 +106,32 @@
                     <control type="group" description="Bottom Row">
                         <top>430</top>
                         <include content="DialogVideoInfo_WidgetSelector_Grouplist">
+                            <visible allowhiddenfocus="true">ControlGroup(5500).HasFocus()</visible>
+                            <include content="DialogVideoInfo_WidgetButton_Recommendations">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Similar">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Studio">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Director">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Year">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_Genre">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                            <include content="DialogVideoInfo_WidgetButton_CastFeature">
+                                <param name="include" value="DialogVideoInfo_WidgetSelector_BackingButton" />
+                            </include>
+                        </include>
+                        <include content="DialogVideoInfo_WidgetSelector_Grouplist">
                             <param name="id" value="5500" />
-                            <param name="groupid" value="5700" />
+                            <visible allowhiddenfocus="true">ControlGroup(5500).HasFocus()</visible>
                             <include>DialogVideoInfo_WidgetButton_Recommendations</include>
                             <include>DialogVideoInfo_WidgetButton_Similar</include>
                             <include>DialogVideoInfo_WidgetButton_Studio</include>
@@ -522,12 +567,34 @@
             <usecontrolcoords>true</usecontrolcoords>
             <itemgap>15</itemgap>
             <orientation>horizontal</orientation>
-            <visible allowhiddenfocus="true">ControlGroup($PARAM[id]).HasFocus()</visible>
             <nested />
         </control>
     </include>
 
-    <include name="DialogVideoInfo_WidgetSelector_Button">
+    <include name="DialogVideoInfo_WidgetSelector_BackingButton">
+        <control type="togglebutton">
+            <top>4</top>
+            <left>15</left>
+            <width>auto</width>
+            <height>50</height>
+            <aligny>center</aligny>
+            <font>font_tiny_bold</font>
+            <textcolor>00ffffff</textcolor>
+            <focusedcolor>00ffffff</focusedcolor>
+            <selectedcolor>00ffffff</selectedcolor>
+            <label>$PARAM[label]</label>
+            <altlabel>$PARAM[label]</altlabel>
+            <textoffsetx>0</textoffsetx>
+            <usealttexture>Control.HasFocus($PARAM[id])</usealttexture>
+            <alttexturefocus border="10" colordiffuse="$VAR[ColorHighlight]">common/underline.png</alttexturefocus>
+            <alttexturenofocus border="10" colordiffuse="$VAR[ColorHighlight]">common/underline.png</alttexturenofocus>
+            <texturefocus />
+            <texturenofocus />
+            <nested />
+        </control>
+    </include>
+
+    <include name="DialogVideoInfo_WidgetSelector_MainButton">
         <control type="button" id="$PARAM[id]">
             <top>4</top>
             <left>15</left>
@@ -539,20 +606,35 @@
             <focusedcolor>main_fg_100</focusedcolor>
             <label>$PARAM[label]</label>
             <textoffsetx>0</textoffsetx>
-            <texturefocus border="10" colordiffuse="$VAR[ColorHighlight]">common/underline.png</texturefocus>
+            <texturefocus border="10" colordiffuse="$VAR[ColorGradient]">common/underline-gradient.png</texturefocus>
             <texturenofocus />
             <nested />
+            <include>Defs_InfoList_OnBack</include>
+            <onclick>Action(Down)</onclick>
         </control>
+    </include>
+
+    <include name="DialogVideoInfo_WidgetSelector_Button">
+        <param name="include" default="DialogVideoInfo_WidgetSelector_MainButton" />
+        <definition>
+            <include content="$PARAM[include]">
+                <param name="id" value="$PARAM[id]" />
+                <param name="label" value="$PARAM[label]" />
+                <nested />
+            </include>
+        </definition>
     </include>
 
     <include name="DialogVideoInfo_Widget">
         <param name="castlabel" default="false" />
         <param name="focusbounce" default="true" />
         <param name="include" default="Viewtype_Poster" />
+        <param name="standardonclick" default="true" />
         <definition>
             <include content="View_Cast_Toplabel">
                 <param name="groupid" value="$PARAM[groupid]" />
                 <param name="id" value="$PARAM[id]" />
+                <param name="altid" value="$PARAM[altid]" />
                 <param name="label" value="$PARAM[label]" />
                 <param name="spinner-visible" value="false" />
                 <left>85</left>
@@ -573,6 +655,7 @@
             </control>
             <include content="$PARAM[include]">
                 <param name="id" value="$PARAM[id]" />
+                <param name="altid" value="$PARAM[altid]" />
                 <param name="focusbounce" value="$PARAM[focusbounce]" />
                 <param name="castlabel" value="$PARAM[castlabel]" />
                 <param name="label2" value="$PARAM[label2]" />
@@ -584,6 +667,8 @@
                 <left>20</left>
                 <top>infowidgets_item_top</top>
                 <visible>$PARAM[visible]</visible>
+                <include>Defs_InfoList_OnBack</include>
+                <include condition="$PARAM[standardonclick]">Defs_InfoList_OnClick</include>
             </include>
         </definition>
     </include>
@@ -680,22 +765,57 @@
     <!-- Cast Widget -->
     <include name="DialogVideoInfo_WidgetButton_Cast">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Cast" />
-            <param name="id" value="5200" />
+            <param name="id" value="5000" />
             <onup>300</onup>
-            <ondown>50</ondown>
+            <ondown condition="!Integer.IsEqual(Container(50).NumItems,0)">5050</ondown>
+            <ondown condition="Integer.IsEqual(Container(50).NumItems,0) + !Integer.IsEqual(Container(5051).NumItems,0)">5051</ondown>
             <onfocus>SetProperty(WS1,Cast)</onfocus>
         </include>
     </include>
     <include name="DialogVideoInfo_WidgetList_Cast">
+        <control type="button" id="5050">
+            <texturefocus />
+            <texturenofocus />
+            <font />
+            <textcolor />
+            <onclick condition="Skin.HasSetting(DisableExtendedInfo)">SetFocus(50)</onclick>
+            <onclick condition="Skin.HasSetting(DisableExtendedInfo)">Action(Select)</onclick>
+            <onclick condition="!Skin.HasSetting(DisableExtendedInfo)">SetFocus(300)</onclick>
+            <onclick condition="!Skin.HasSetting(DisableExtendedInfo)">RunScript(plugin.video.themoviedb.helper,add_query=$INFO[Container(50).ListItem.Label],type=person,call_auto=1190)</onclick>
+            <onback>300</onback>
+            <onup>5200</onup>
+            <ondown>5500</ondown>
+            <onleft>SetFocus(50)</onleft>
+            <onleft>Left</onleft>
+            <onright>SetFocus(50)</onright>
+            <onright>Right</onright>
+        </control>
         <include content="DialogVideoInfo_Widget">
             <param name="groupid" value="5100" />
             <param name="id" value="50" />
-            <param name="controlgroup" value="5000" />
+            <param name="altid" value="5050" />
+            <param name="controlgroup" value="5200" />
             <param name="label" value="$VAR[Label_Info_Title,$LOCALIZE[31058] ,]" />
             <param name="castlabel" value="true" />
+            <param name="focusbounce" value="false" />
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Cast)" />
-            <onup>5000</onup>
+            <param name="standardonclick" value="false" />
+            <onup>5200</onup>
+            <ondown>5500</ondown>
+            <onfocus>SetFocus(5050)</onfocus>
+        </include>
+        <include content="DialogVideoInfo_Widget">
+            <param name="groupid" value="5151" />
+            <param name="id" value="5051" />
+            <param name="controlgroup" value="5200" />
+            <param name="label" value="$VAR[Label_Info_Title,$LOCALIZE[31058] ,]" />
+            <param name="castlabel" value="true" />
+            <param name="label2" value="ListItem.Property(character)" />
+            <param name="visible" value="String.IsEqual(Window.Property(WS1),Cast) + Integer.IsEqual(Container(50).NumItems,0)" />
+            <content limit="25" target="videos">$VAR[Info_CastMembers]</content>
+            <onup>5200</onup>
             <ondown>5500</ondown>
         </include>
     </include>
@@ -703,6 +823,7 @@
     <!-- Crew Widget -->
     <include name="DialogVideoInfo_WidgetButton_Crew">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Crew" />
             <param name="id" value="5201" />
             <onup>300</onup>
@@ -714,13 +835,13 @@
         <include content="DialogVideoInfo_Widget">
             <param name="groupid" value="5101" />
             <param name="id" value="5001" />
-            <param name="controlgroup" value="5000" />
+            <param name="controlgroup" value="5200" />
             <param name="label" value="$VAR[Label_Info_Title,Crew of ,]" />
             <param name="castlabel" value="true" />
             <param name="label2" value="ListItem.Property(job)" />
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Crew)" />
             <content limit="25" target="videos">$VAR[Info_CrewMembers]</content>
-            <onup>5000</onup>
+            <onup>5200</onup>
             <ondown>5500</ondown>
         </include>
     </include>
@@ -728,6 +849,7 @@
     <!-- Posters Widget -->
     <include name="DialogVideoInfo_WidgetButton_Posters">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Posters" />
             <param name="id" value="5202" />
             <onup>300</onup>
@@ -739,11 +861,12 @@
         <include content="DialogVideoInfo_Widget">
             <param name="groupid" value="5102" />
             <param name="id" value="5002" />
-            <param name="controlgroup" value="5000" />
+            <param name="controlgroup" value="5200" />
             <param name="label" value="Posters" />
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Posters)" />
+            <param name="standardonclick" value="false" />
             <content target="images">$VAR[Info_Posters]</content>
-            <onup>5000</onup>
+            <onup>5200</onup>
             <ondown>5500</ondown>
             <onclick>SetFocus(6202)</onclick>
         </include>
@@ -752,6 +875,7 @@
     <!-- Youtube Widget -->
     <include name="DialogVideoInfo_WidgetButton_Youtube">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Youtube" />
             <param name="id" value="5211" />
             <onup>300</onup>
@@ -763,14 +887,15 @@
         <include content="DialogVideoInfo_Widget">
             <param name="groupid" value="5111" />
             <param name="id" value="5011" />
-            <param name="controlgroup" value="5000" />
+            <param name="controlgroup" value="5200" />
             <param name="label" value="Youtube" />
             <param name="include" value="Viewtype_Landscape" />
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Youtube)" />
+            <param name="standardonclick" value="false" />
             <content limit="25" target="videos" sortby="file">$VAR[Info_Youtube]</content>
             <onclick>PlayMedia($INFO[Container(5041).ListItem.FileNameAndPath])</onclick>
             <movement>1</movement>
-            <onup>5000</onup>
+            <onup>5200</onup>
             <ondown>5500</ondown>
         </include>
     </include>
@@ -778,6 +903,7 @@
     <!-- Gallery Widget -->
     <include name="DialogVideoInfo_WidgetButton_Gallery">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Gallery" />
             <param name="id" value="5212" />
             <onup>300</onup>
@@ -789,15 +915,16 @@
         <include content="DialogVideoInfo_Widget">
             <param name="groupid" value="5112" />
             <param name="id" value="5012" />
-            <param name="controlgroup" value="5000" />
+            <param name="controlgroup" value="5200" />
             <param name="label" value="Gallery" />
             <param name="specialicon" value="false" />
             <param name="include" value="Viewtype_Landscape" />
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Gallery)" />
+            <param name="standardonclick" value="false" />
             <include condition="String.IsEmpty(ListItem.Property(tmdb_id)) + [!String.IsEmpty(ListItem.Art(fanart1)) | !String.IsEmpty(ListItem.Art(discart))]">Items_Info_Gallery</include>
             <include condition="!String.IsEmpty(ListItem.Property(tmdb_id)) | [String.IsEmpty(ListItem.Art(fanart1)) + String.IsEmpty(ListItem.Art(discart))]">Info_Fanart_List</include>
             <movement>1</movement>
-            <onup>5000</onup>
+            <onup>5200</onup>
             <ondown>5500</ondown>
             <onclick>SetFocus(6212)</onclick>
         </include>
@@ -806,6 +933,7 @@
     <!-- Collection Widget -->
     <include name="DialogVideoInfo_WidgetButton_Collection">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Collection" />
             <param name="id" value="5213" />
             <onup>300</onup>
@@ -818,11 +946,11 @@
         <include content="DialogVideoInfo_Widget">
             <param name="groupid" value="5113" />
             <param name="id" value="5013" />
-            <param name="controlgroup" value="5000" />
+            <param name="controlgroup" value="5200" />
             <param name="label" value="$VAR[Label_SetName,$LOCALIZE[31057] ,]" />
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Collection)" />
             <content limit="25" target="videos" sortby="year" sortorder="ascending">$VAR[Info_Sets]</content>
-            <onup>5000</onup>
+            <onup>5200</onup>
             <ondown>5500</ondown>
         </include>
     </include>
@@ -830,6 +958,7 @@
     <!-- Recommendations Widget -->
     <include name="DialogVideoInfo_WidgetButton_Recommendations">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Recommendations" />
             <param name="id" value="5204" />
             <onup>5600</onup>
@@ -852,6 +981,7 @@
     <!-- Similar Widget -->
     <include name="DialogVideoInfo_WidgetButton_Similar">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Similar" />
             <param name="id" value="5205" />
             <onup>5600</onup>
@@ -874,6 +1004,7 @@
     <!-- Studio Widget -->
     <include name="DialogVideoInfo_WidgetButton_Studio">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Studio" />
             <param name="id" value="5206" />
             <onup>5600</onup>
@@ -896,6 +1027,7 @@
     <!-- Director Widget -->
     <include name="DialogVideoInfo_WidgetButton_Director">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Director" />
             <param name="id" value="5207" />
             <onup>5600</onup>
@@ -918,6 +1050,7 @@
     <!-- Year Widget -->
     <include name="DialogVideoInfo_WidgetButton_Year">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Year" />
             <param name="id" value="5208" />
             <onup>5600</onup>
@@ -940,6 +1073,7 @@
     <!-- Genre Widget -->
     <include name="DialogVideoInfo_WidgetButton_Genre">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Genre" />
             <param name="id" value="5209" />
             <onup>5600</onup>
@@ -962,6 +1096,7 @@
     <!-- CastFeature Widget -->
     <include name="DialogVideoInfo_WidgetButton_CastFeature">
         <include content="DialogVideoInfo_WidgetSelector_Button">
+            <param name="include" value="$PARAM[include]" />
             <param name="label" value="Starring Cast" />
             <param name="id" value="5210" />
             <onup>5600</onup>
