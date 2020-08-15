@@ -893,7 +893,9 @@
             <param name="visible" value="String.IsEqual(Window.Property(WS1),Youtube)" />
             <param name="standardonclick" value="false" />
             <content limit="25" target="videos" sortby="file">$VAR[Info_Youtube]</content>
-            <onclick>PlayMedia($INFO[Container(5041).ListItem.FileNameAndPath])</onclick>
+            <onclick>SetProperty(HasTrailer,$INFO[Container(5011).ListItem.FileNameAndPath],Home)</onclick>
+            <onclick>PlayMedia($INFO[Container(5011).ListItem.FileNameAndPath],False,1)</onclick>
+            <onclick>SetFocus(9608)</onclick>
             <movement>1</movement>
             <onup>5200</onup>
             <ondown>5500</ondown>
